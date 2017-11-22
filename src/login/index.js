@@ -12,15 +12,16 @@ const TopBarDiv = styled.div`
 
 const TopBar = () => (
     <TopBarDiv>
-        <span style={{fontSize: '1.25em'}}>เข้าสู่ระบบลงทะเบียนเรียน</span>
+        <span style={{fontSize: '1.25em'}}>ข้อมูลรายวิชา</span>
     </TopBarDiv>
 )
 
 const LoginInfoBoxDiv = styled.div`
     padding: 1em;
     background-color: royalblue;
-    margin: 1.5em 9em 3em 9em;
+    margin: 1.5em 0em 3em 9em;
     border-radius: 5px;
+    width: 65%;
 `
 
 const LoginInfoContentDiv = styled.div`

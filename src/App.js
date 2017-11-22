@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import SideBar from './sidebar/index'
 import LoginPage from './login/index'
+import CourseInfoPage from './course-info/index'
 import './index.css'
 import { Route } from 'react-router'
 
@@ -36,6 +37,7 @@ class App extends Component {
                 <SideBar />
                 <ContentWrapper>
                     <Route exact path="/" component={LoginPage} />
+                    <Route path="/courseinfo" component={CourseInfoPage} />
                 </ContentWrapper>
             </div>
         )
