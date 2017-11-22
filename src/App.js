@@ -1,94 +1,43 @@
 import React, { Component } from 'react'
-import SimpleStorageContract from '../build/contracts/SimpleStorage.json'
-import getWeb3 from './utils/getWeb3'
+import SideBar from './sidebar'
 
-import './css/oswald.css'
-import './css/open-sans.css'
-import './css/pure-min.css'
-import './App.css'
-
-class App extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      storageValue: 0,
-      web3: null
-    }
-  }
-
-  componentWillMount() {
-    // Get network provider and web3 instance.
-    // See utils/getWeb3 for more info.
-
-    getWeb3
-    .then(results => {
-      this.setState({
-        web3: results.web3
-      })
-
-      // Instantiate contract once web3 provided.
-      this.instantiateContract()
-    })
-    .catch(() => {
-      console.log('Error finding web3.')
-    })
-  }
-
-  instantiateContract() {
-    /*
-     * SMART CONTRACT EXAMPLE
-     *
-     * Normally these functions would be called in the context of a
-     * state management library, but for convenience I've placed them here.
-     */
-
-    const contract = require('truffle-contract')
-    const simpleStorage = contract(SimpleStorageContract)
-    simpleStorage.setProvider(this.state.web3.currentProvider)
-
-    // Declaring this for later so we can chain functions on SimpleStorage.
-    var simpleStorageInstance
-
-    // Get accounts.
-    this.state.web3.eth.getAccounts((error, accounts) => {
-      simpleStorage.deployed().then((instance) => {
-        simpleStorageInstance = instance
-
-        // Stores a given value, 5 by default.
-        return simpleStorageInstance.set(5, {from: accounts[0]})
-      }).then((result) => {
-        // Get the value from the contract to prove it worked.
-        return simpleStorageInstance.get.call(accounts[0])
-      }).then((result) => {
-        // Update state with the result.
-        return this.setState({ storageValue: result.c[0] })
-      })
-    })
-  }
-
-  render() {
-    return (
-      <div className="App">
-        <nav className="navbar pure-menu pure-menu-horizontal">
-            <a href="#" className="pure-menu-heading pure-menu-link">Truffle Box</a>
-        </nav>
-
-        <main className="container">
-          <div className="pure-g">
-            <div className="pure-u-1-1">
-              <h1>Good to Go!</h1>
-              <p>Your Truffle Box is installed and ready.</p>
-              <h2>Smart Contract Example</h2>
-              <p>If your contracts compiled and migrated successfully, below will show a stored value of 5 (by default).</p>
-              <p>Try changing the value stored on <strong>line 59</strong> of App.js.</p>
-              <p>The stored value is: {this.state.storageValue}</p>
-            </div>
-          </div>
-        </main>
-      </div>
-    );
-  }
+const contentWrapperStyle = {
+    marginLeft: '16%',
+    backgroundColor: 'red'
 }
 
-export default App
+const LongLorem = () => (
+    <div style={{height: '200vh'}}>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem, eaque? Recusandae, repellendus omnis cum cumque nesciunt aliquid qui ullam soluta nobis. Impedit, atque voluptatem incidunt fuga quasi praesentium dolores aut.
+        Laborum mollitia eius natus saepe expedita temporibus deserunt at! Doloremque fuga ut laudantium suscipit sit illo! Iusto laborum magni reiciendis tempora sunt repellat voluptatum ipsam id, ut aliquid ducimus culpa!
+        Enim incidunt excepturi non harum nam, autem hic vitae fuga id, cum, totam inventore magnam voluptatem ex quas assumenda explicabo. Ratione quae tempore doloremque voluptatem eum. Cum magni ratione placeat.
+        Aliquam aspernatur dolore quo sunt esse magnam iste quisquam nostrum, aperiam, consectetur maiores minima autem dolorum aut incidunt voluptates! Corrupti non quasi culpa itaque tempora aperiam pariatur alias recusandae delectus!
+        Odit voluptate facilis aliquid rerum inventore earum exercitationem harum quis blanditiis voluptates facere iste laudantium, repudiandae quisquam doloremque fuga aliquam error sit tempora dicta dolores, necessitatibus adipisci modi. Fuga, ipsum.
+        Dolores iure aliquid facere natus eum facilis, magni possimus consectetur labore amet neque nam. Provident nulla beatae sint fugiat id minima velit quisquam! Tempora, provident quam qui ab reprehenderit cumque.
+        Iste dolorum possimus nihil nam ea quae laudantium quibusdam placeat! Aliquid aspernatur minus asperiores unde eveniet dolorem, aperiam saepe numquam dolor autem delectus possimus laborum, perferendis impedit. Laudantium, incidunt tempora.
+        Sint, laborum? Fuga, ipsa consectetur! Recusandae odio adipisci eaque provident dolor rem autem iste fugiat, dolores saepe repellendus et. Eos tempora dolor veritatis alias maiores at culpa? Amet, aspernatur nihil!
+        Eius, nostrum at tempora nisi excepturi, dolorem, et laborum deleniti repellendus dolorum sequi ex voluptatibus praesentium veritatis dicta quis architecto aliquid quaerat soluta omnis ullam tempore consequatur necessitatibus voluptate. Maxime.
+        Rem perferendis voluptatem nobis ipsum, maxime magnam nisi natus, delectus sapiente rerum quos id dolores eius dolor vel, eligendi ad reprehenderit dignissimos soluta aperiam enim cupiditate mollitia explicabo. Tenetur, quos?
+    </div>
+)
+
+const ContentWrapper = ({children}) => (
+    <div style={contentWrapperStyle}>
+        {children}
+    </div>
+)
+
+class App extends Component {
+    render() {
+        return (
+            <div>
+                <SideBar />
+                <ContentWrapper>
+                    <LongLorem />
+                </ContentWrapper>
+            </div>
+        )
+    }
+}
+
+export default App;
