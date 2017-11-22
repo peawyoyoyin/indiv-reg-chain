@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import SideBar from './sidebar'
+import SideBar from './sidebar/index'
 import LoginPage from './login/index'
 import './index.css'
 
 const contentWrapperStyle = {
-    marginLeft: '16%',
+    marginLeft: '15%',
 }
 
 /* const LongLorem = () => (
