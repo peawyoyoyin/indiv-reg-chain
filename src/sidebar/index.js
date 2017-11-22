@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Logo from './logo.svg'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 const MenuULWrapper = styled.ul`
     list-style-type: none;
@@ -29,13 +30,10 @@ class SideBar extends Component {
                 <hr style={{borderWidth: 0, borderTopWidth: 1}}/>
                 <MenuULWrapper>
                     <li>
-                        <a href="#"> Hello </a>
+                        <Link to="/">Login</Link>
                     </li>
                     <li>
-                        <a href="#"> Hello </a>
-                    </li>
-                    <li>
-                        <a href="#"> Hello </a>
+                        <Link to="/courseinfo">Course Info</Link>
                     </li>
                 </MenuULWrapper>
             </SideBarWrapper>

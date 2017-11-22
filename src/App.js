@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import SideBar from './sidebar/index'
 import LoginPage from './login/index'
 import './index.css'
+import { Route } from 'react-router'
 
 const contentWrapperStyle = {
     marginLeft: '15%',
@@ -34,7 +35,7 @@ class App extends Component {
             <div>
                 <SideBar />
                 <ContentWrapper>
-                    <LoginPage />
+                    <Route exact path="/" component={LoginPage} />
                 </ContentWrapper>
             </div>
         )

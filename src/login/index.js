@@ -2,26 +2,24 @@ import React, { Component } from 'react'
 import AuthenticationBox from './authentication'
 import styled from 'styled-components'
 
-
-const styles = {
-    topBar: {
-        paddingTop: '1em',
-        paddingBottom: '1em',
-        backgroundColor: '#A5E7F7',
-        marginBottom: '1.5em'
-    }
-}
+const TopBarDiv = styled.div`
+    padding-top: 1em;
+    padding-bottom: 1em;
+    background-color: #A5E7F7;
+    margin-bottom: 1.5em;
+    margin: 0;
+`
 
 const TopBar = () => (
-    <div style={styles.topBar}>
+    <TopBarDiv>
         <span style={{fontSize: '1.25em'}}>เข้าสู่ระบบลงทะเบียนเรียน</span>
-    </div>
+    </TopBarDiv>
 )
 
 const LoginInfoBoxDiv = styled.div`
     padding: 1em;
     background-color: royalblue;
-    margin: 1.5em 6em 3em 6em;
+    margin: 1.5em 9em 3em 9em;
     border-radius: 5px;
 `
 
@@ -32,16 +30,9 @@ const LoginInfoContentDiv = styled.div`
 const LoginInfoBox = () => (
     <LoginInfoBoxDiv>
         <LoginInfoContentDiv>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed debitis reprehenderit dolores numquam voluptates aliquid? Assumenda tenetur mollitia odio ad! Culpa exercitationem ea illo nobis soluta temporibus ipsam rerum deserunt.
-            Amet modi ullam eius, ab rerum illum quo vel deleniti voluptatum illo est magni. Ullam incidunt, provident repellat exercitationem quia laudantium nobis. Placeat tempora vel quis molestias illum architecto nisi!
-            Repudiandae facilis, hic nemo molestias dolorum sit quia molestiae temporibus dignissimos deserunt illum corporis, voluptatum dolor corrupti unde numquam, rem doloremque veniam neque et ipsam! Optio consectetur rem tempora iusto?
-            Exercitationem impedit dolorum tempore velit sunt reiciendis non, nobis facere nihil quam repudiandae earum at provident accusantium quibusdam odio eum, culpa labore amet beatae doloribus. Eligendi inventore odit alias natus?
-            Consectetur, quas illo optio, aliquid officia nostrum aperiam veniam quae inventore placeat eum a labore culpa expedita assumenda blanditiis molestiae! Nobis eius quasi quas aspernatur adipisci. Quidem omnis minima corporis?
-            Deleniti quaerat praesentium, laborum odit autem accusantium nemo nulla. Natus non vel delectus aperiam, similique ea impedit temporibus excepturi minus totam, aliquam consectetur dolor, debitis eligendi fuga. Tempora, minima eos?
-            Perspiciatis ipsum iure soluta inventore maxime nisi! Suscipit minima eius ad nesciunt commodi hic quasi consequatur quis laudantium incidunt doloribus vero ut delectus ipsam ratione, placeat corrupti dolore voluptatem in!
-            Eligendi corporis alias hic deleniti minima ut itaque error expedita nobis neque. Voluptas iure veniam totam. Nisi aspernatur pariatur, doloribus possimus excepturi consequatur! Molestiae asperiores suscipit id laudantium cumque! Ad?
-            Neque deserunt, nostrum a officia harum earum dolores consequuntur aspernatur fuga nemo, eaque aliquam doloremque quaerat, totam impedit iure. Unde sunt alias eos libero ad, sapiente exercitationem molestias tempora dignissimos!
-            Totam ut voluptas similique atque iste et hic temporibus culpa qui quae amet beatae, facilis dolores fuga in adipisci odit maxime excepturi doloremque nihil quos repellendus tempore? Repellat, iusto autem.
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam suscipit officiis ea eligendi quaerat, nulla explicabo asperiores laborum eaque aperiam, mollitia ab ad maiores? Consequatur alias voluptate facilis repellendus obcaecati.
+            Ullam libero fuga voluptates voluptatem debitis praesentium laudantium sunt sit obcaecati minima voluptatum similique labore accusamus delectus, eum doloribus. Quaerat voluptate quod sint libero eveniet dolore dolorum quisquam aliquid animi!
+            Nobis eveniet fugiat doloremque sit hic labore ea cumque provident corporis, id dolores fuga voluptatibus repudiandae debitis corrupti nulla ipsa itaque reiciendis porro molestias harum ipsum! Perspiciatis ipsum consequatur iure!
         </LoginInfoContentDiv>
         <hr style={{borderColor: 'white', borderWidth: 0, borderTopWidth: 3, opacity: '0.25', noshade: 'noshade'}}/>
         <LoginInfoContentDiv>
@@ -68,11 +59,9 @@ class LoginPage extends Component {
     render() {
         return (
             <div>
-                <div>
-                    < TopBar />
-                    < LoginInfoBox />
-                    < AuthenticationBox />
-                </div>
+                < TopBar />
+                < LoginInfoBox />
+                < AuthenticationBox />
             </div>
         )
     }
