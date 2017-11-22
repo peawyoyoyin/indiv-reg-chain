@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import SideBar from './sidebar'
+import LoginPage from './login/index'
+import './index.css'
 
 const contentWrapperStyle = {
     marginLeft: '16%',
-    backgroundColor: 'red'
 }
 
-const LongLorem = () => (
+/* const LongLorem = () => (
     <div style={{height: '200vh'}}>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem, eaque? Recusandae, repellendus omnis cum cumque nesciunt aliquid qui ullam soluta nobis. Impedit, atque voluptatem incidunt fuga quasi praesentium dolores aut.
         Laborum mollitia eius natus saepe expedita temporibus deserunt at! Doloremque fuga ut laudantium suscipit sit illo! Iusto laborum magni reiciendis tempora sunt repellat voluptatum ipsam id, ut aliquid ducimus culpa!
@@ -19,7 +20,7 @@ const LongLorem = () => (
         Eius, nostrum at tempora nisi excepturi, dolorem, et laborum deleniti repellendus dolorum sequi ex voluptatibus praesentium veritatis dicta quis architecto aliquid quaerat soluta omnis ullam tempore consequatur necessitatibus voluptate. Maxime.
         Rem perferendis voluptatem nobis ipsum, maxime magnam nisi natus, delectus sapiente rerum quos id dolores eius dolor vel, eligendi ad reprehenderit dignissimos soluta aperiam enim cupiditate mollitia explicabo. Tenetur, quos?
     </div>
-)
+) */
 
 const ContentWrapper = ({children}) => (
     <div style={contentWrapperStyle}>
@@ -33,7 +34,7 @@ class App extends Component {
             <div>
                 <SideBar />
                 <ContentWrapper>
-                    <LongLorem />
+                    <LoginPage />
                 </ContentWrapper>
             </div>
         )
