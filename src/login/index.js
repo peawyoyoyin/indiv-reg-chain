@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import AuthenticationBox from './authentication'
+import styled from 'styled-components'
+
 
 const styles = {
     topBar: {
@@ -7,14 +9,6 @@ const styles = {
         paddingBottom: '1em',
         backgroundColor: '#A5E7F7',
         marginBottom: '1.5em'
-    },
-    loginInfoBox: {
-        wrapper: {
-            padding: '0.5em',
-            backgroundColor: 'royalblue',
-            margin: '2.5em',
-            borderRadius: 5
-        }
     }
 }
 
@@ -24,8 +18,15 @@ const TopBar = () => (
     </div>
 )
 
+const LoginInfoBoxDiv = styled.div`
+    padding: 0.5em;
+    background-color: royalblue;
+    margin: 2.5em;
+    border-radius: 5px;
+`
+
 const LoginInfoBox = () => (
-    <div style={styles.loginInfoBox.wrapper}>
+    <LoginInfoBoxDiv>
         <div>
             Hello
         </div>
@@ -33,7 +34,7 @@ const LoginInfoBox = () => (
         <div>
             Bye
         </div>
-    </div>
+    </LoginInfoBoxDiv>
 )
 
 class LoginPage extends Component {

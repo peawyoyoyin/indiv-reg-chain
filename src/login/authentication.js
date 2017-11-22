@@ -1,15 +1,26 @@
 import React, { Component } from 'react'
+import styled from 'styled-components'
+
+const AuthenticationBoxWrapper = styled.div`
+    margin-left: 5em;
+    margin-right: 5em;
+    margin-top: 2.5em;
+    margin-bottom: 2.5em;
+    border: 1px solid black;
+    padding: 1.5em;
+    text-align: center;
+`
 
 class AuthenticationBox extends Component {
     render() {
         return (
-            <div style={{marginLeft: '5em', marginRight: '5em', marginTop: '2.5em', marginBottom: '2.5em', border: '1px solid black', padding: '1.5em'}}> 
+            <AuthenticationBoxWrapper>
                 Authentication Box
                 <br />
                 <input placeholder="input authentication"/>
                 <br />
                 <button> Submit </button>
-            </div>
+            </AuthenticationBoxWrapper>
         )
     }
 }
