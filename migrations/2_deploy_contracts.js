@@ -1,5 +1,6 @@
-var SimpleStorage = artifacts.require("./SimpleStorage.sol");
-
+var Subject = artifacts.require("./Subject.sol");
+var Reg = artifacts.require("./Reg.sol");
 module.exports = function(deployer) {
-  deployer.deploy(SimpleStorage);
+  deployer.deploy(Subject);
+  deployer.deploy(Reg);
 };

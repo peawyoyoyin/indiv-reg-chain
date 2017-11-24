@@ -9,7 +9,7 @@ contract Subject {
     uint openSeats;
     mapping (address => Grade) grades;
     address teacher;
-
+    
     function Subject(uint _openSeats, address _teacher) {
         openSeats = _openSeats;
         teacher = _teacher;
@@ -36,5 +36,21 @@ contract Subject {
         } else {
             grades[_student] = Grade.NotExist;
         }
+    }
+
+    function getExist() returns (bool) {
+        return exist;
+    }
+
+    function getWithdrawPenalty() returns (bool) {
+        return withdrawPenalty;
+    }
+
+    function getOpenSeats() returns (uint) {
+        return openSeats;
+    }
+
+    function getTeacher() returns (address) {
+        return teacher;
     }
 }
