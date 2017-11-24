@@ -3,6 +3,7 @@ import SideBar from './sidebar/index'
 import LoginPage from './login/index'
 import CourseInfoPage from './course-info/index'
 import CourseResultsPage from './course-results/index'
+import RegisterPage from './register/index'
 import './index.css'
 import { Route, Redirect } from 'react-router'
 
@@ -72,6 +73,16 @@ class App extends Component {
                         }
                         return (
                             <CourseResultsPage/>
+                        )
+                    }}/>
+                    <Route path="/register" render={() => {
+                        if(!this.state.loggedIn) {
+                            return (
+                                <Redirect to="/"/>
+                            )
+                        }
+                        return (
+                            <RegisterPage/>
                         )
                     }}/>
                 </ContentWrapper>
