@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import { withRouter } from 'react-router';
+import { withRouter } from 'react-router'
 
 const AuthenticationBoxWrapper = styled.div`
     margin-left: 9em;

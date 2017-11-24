@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import SideBar from './sidebar/index'
 import LoginPage from './login/index'
 import CourseInfoPage from './course-info/index'
+import CourseResultsPage from './course-results/index'
 import './index.css'
 import { Route, Redirect } from 'react-router'
 
@@ -61,6 +62,16 @@ class App extends Component {
                         }
                         return (
                             <Redirect to="/"/>
+                        )
+                    }}/>
+                    <Route path="/courseresults" render={() => {
+                        if(!this.state.loggedIn) {
+                            return (
+                                <Redirect to="/"/>
+                            )
+                        }
+                        return (
+                            <CourseResultsPage/>
                         )
                     }}/>
                 </ContentWrapper>
