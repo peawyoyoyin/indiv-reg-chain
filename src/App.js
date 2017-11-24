@@ -3,7 +3,7 @@ import SideBar from './sidebar/index'
 import LoginPage from './login/index'
 import CourseInfoPage from './course-info/index'
 import './index.css'
-import { Route } from 'react-router'
+import { Route, Redirect } from 'react-router'
 
 const contentWrapperStyle = {
     marginLeft: '15%',
@@ -31,13 +31,38 @@ const ContentWrapper = ({children}) => (
 )
 
 class App extends Component {
+    constructor() {
+        super()
+        this.state = {
+            loggedIn: false
+        }
+    }
+
     render() {
         return (
             <div>
-                <SideBar />
+                <SideBar loggedIn={this.state.loggedIn}/>
                 <ContentWrapper>
-                    <Route exact path="/" component={LoginPage} />
-                    <Route path="/courseinfo" component={CourseInfoPage} />
+                    <Route exact path="/" render={() => (
+                        this.state.loggedIn ? <span> Already Logged In </span> : <LoginPage/>
+                    )} />
+                    <Route path="/courseinfo" component={CourseInfoPage}/>
+                    <Route path="/loginsuccess" render={() => {
+                        if(!this.state.loggedIn) {
+                            this.setState({loggedIn: true})
+                        }
+                        return (
+                            <Redirect to="/"/>
+                        )
+                    }}/>
+                    <Route path="/logout" render={() => {
+                        if(this.state.loggedIn) {
+                            this.setState({loggedIn: false})
+                        }
+                        return (
+                            <Redirect to="/"/>
+                        )
+                    }}/>
                 </ContentWrapper>
             </div>
         )

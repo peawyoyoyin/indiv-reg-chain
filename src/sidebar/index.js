@@ -32,6 +32,19 @@ class SideBar extends Component {
                     <li>
                         <Link to="/">Login</Link>
                     </li>
+                    {
+                        this.props.loggedIn ? (
+                            [<li>
+                                <Link to="/register">Register</Link>
+                            </li>,
+                            <li>
+                                <Link to="/courseresults">Course Results</Link>
+                            </li>,
+                            <li>
+                                <Link to="/logout">Log out</Link>
+                            </li>]
+                        ) : null
+                    }
                     <li>
                         <Link to="/courseinfo">Course Info</Link>
                     </li>

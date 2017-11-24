@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import { withRouter } from 'react-router';
 
 const AuthenticationBoxWrapper = styled.div`
     margin-left: 9em;
@@ -12,18 +13,33 @@ const AuthenticationBoxWrapper = styled.div`
     width: 65%;
 `
 
-class AuthenticationBox extends Component {
+const authenticateSuccess = (text) => text === 'correct';
+
+class AuthenticationBoxUI extends Component {
+    constructor() {
+        super()
+        this.handleAuthenticationSubmit = this.handleAuthenticationSubmit.bind(this);
+    }
+
+    handleAuthenticationSubmit() {
+        if(authenticateSuccess(this.textInput.value)) {
+            this.props.history.push('/loginsuccess');
+        }
+    }
+
     render() {
         return (
             <AuthenticationBoxWrapper>
                 Authentication Box
                 <br />
-                <input placeholder="input authentication"/>
+                <input placeholder="input authentication" ref={input => {this.textInput = input}}/>
                 <br />
-                <button> Submit </button>
+                <button onClick={this.handleAuthenticationSubmit}> Submit </button>
             </AuthenticationBoxWrapper>
         )
     }
 }
+
+const AuthenticationBox = withRouter(AuthenticationBoxUI);
 
 export default AuthenticationBox
