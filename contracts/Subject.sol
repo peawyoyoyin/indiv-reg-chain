@@ -34,8 +34,9 @@ contract Subject is Mortal {
     }
 
     function registerStudent(address _student) public {
-        require(grades[_student] == Grade.NotExist);
+        require(grades[_student] == Grade.NotExist && openSeats > 0);
         grades[_student] = Grade.Undergoing;
+        openSeats = openSeats - 1;
     }
 
     function studentWithDraw(address _student, bool _withdrawPenalty) public {
@@ -43,6 +44,7 @@ contract Subject is Mortal {
             grades[_student] = Grade.W;
         } else {
             grades[_student] = Grade.NotExist;
+            openSeats = openSeats + 1;
         }
     }
 

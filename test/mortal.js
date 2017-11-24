@@ -9,7 +9,7 @@ contract('Mortal', function(accounts) {
             return MortalInstance.owner();
         }).then(function (owner) {
             console.log("mortal owner", owner);
-        })
+        });
     });
 
 });
