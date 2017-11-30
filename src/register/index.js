@@ -32,7 +32,7 @@ class RegisterPage extends Component {
     render() {
         const { subjects } = this.state
         return (
-            <div>
+            <div style={{padding: '2em'}}>
                 <span> register page </span>
                 <ul>
                     {

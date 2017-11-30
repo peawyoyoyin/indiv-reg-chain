@@ -6,7 +6,7 @@ import './Student.sol';
 
 
 contract Reg is Mortal {
-    bool withDrawPenalty;
+    bool public withDrawPenalty;
     mapping (bytes8 => Subject) subjects;
     mapping (address => Student) students;
 
@@ -24,6 +24,14 @@ contract Reg is Mortal {
     function registerStudent() public onlyOwner {
         require(students[msg.sender].exist() == false);
         students[msg.sender] = Student(msg.sender);
+    }
+
+    function isStudentValid(address _studentAddress) public view {
+        return students[_studentAddress] != 0x0;
+    }
+
+    function isSubjectValid(bytes8 _subjectId) public view {
+        return subjects[_subjectId] != 0x0;
     }
 
     function registerStudentToSubject(address _student, bytes8 _subjectId) {
