@@ -26,12 +26,12 @@ contract Reg is Mortal {
         students[msg.sender] = Student(msg.sender);
     }
 
-    function isStudentValid(address _studentAddress) public view {
-        return students[_studentAddress] != 0x0;
+    function isStudentValid(address _studentAddress) public view returns (bool) {
+        return students[_studentAddress].exist();
     }
 
-    function isSubjectValid(bytes8 _subjectId) public view {
-        return subjects[_subjectId] != 0x0;
+    function isSubjectValid(bytes8 _subjectId) public view returns (bool) {
+        return subjects[_subjectId].exist();
     }
 
     function registerStudentToSubject(address _student, bytes8 _subjectId) {

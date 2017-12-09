@@ -28,6 +28,6 @@ contract Student {
     }
 
     function getStudentSubjects() public returns (bytes8[]) {
-        return subjects;
+        return subjectsList;
     }
 }
