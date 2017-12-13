@@ -31,13 +31,11 @@ const LoginInfoContentDiv = styled.div`
 const LoginInfoBox = () => (
     <LoginInfoBoxDiv>
         <LoginInfoContentDiv>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam suscipit officiis ea eligendi quaerat, nulla explicabo asperiores laborum eaque aperiam, mollitia ab ad maiores? Consequatur alias voluptate facilis repellendus obcaecati.
-            Ullam libero fuga voluptates voluptatem debitis praesentium laudantium sunt sit obcaecati minima voluptatum similique labore accusamus delectus, eum doloribus. Quaerat voluptate quod sint libero eveniet dolore dolorum quisquam aliquid animi!
-            Nobis eveniet fugiat doloremque sit hic labore ea cumque provident corporis, id dolores fuga voluptatibus repudiandae debitis corrupti nulla ipsa itaque reiciendis porro molestias harum ipsum! Perspiciatis ipsum consequatur iure!
+        ยินดีต้อนรับเข้าสู่ระบบลงทะเบียนเรียน
         </LoginInfoContentDiv>
         <hr style={{borderColor: 'white', borderWidth: 0, borderTopWidth: 3, opacity: '0.25', noshade: 'noshade'}}/>
         <LoginInfoContentDiv>
-            Veritatis repellendus cum eius, rerum ab quibusdam eum, saepe alias quas quos hic excepturi? Similique qui quisquam doloremque ad odit quae omnis, mollitia neque nesciunt aspernatur consequuntur doloribus nihil corporis!
+        user1 = 5830000001            user2 = 5830000002
         </LoginInfoContentDiv>
     </LoginInfoBoxDiv>
 )

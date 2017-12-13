@@ -36,7 +36,8 @@ class App extends Component {
     constructor() {
         super()
         this.state = {
-            loggedIn: false
+            loggedIn: false,
+            id: null
         }
     }
 
@@ -46,12 +47,12 @@ class App extends Component {
                 <SideBar loggedIn={this.state.loggedIn}/>
                 <ContentWrapper>
                     <Route exact path="/" render={() => (
-                        this.state.loggedIn ? <span> Already Logged In </span> : <LoginPage/>
+                        this.state.loggedIn ? <span> Already Logged In {this.state.id} </span> : <LoginPage/>
                     )} />
                     <Route path="/courseinfo" component={CourseInfoPage}/>
-                    <Route path="/loginsuccess" render={() => {
+                    <Route path="/loginsuccess/:userid" render={({match}) => {
                         if(!this.state.loggedIn) {
-                            this.setState({loggedIn: true})
+                            this.setState({loggedIn: true, id: match.params.userid})
                         }
                         return (
                             <Redirect to="/"/>
@@ -59,7 +60,7 @@ class App extends Component {
                     }}/>
                     <Route path="/logout" render={() => {
                         if(this.state.loggedIn) {
-                            this.setState({loggedIn: false})
+                            this.setState({loggedIn: false, id: null})
                         }
                         return (
                             <Redirect to="/"/>
@@ -72,7 +73,7 @@ class App extends Component {
                             )
                         }
                         return (
-                            <CourseResultsPage/>
+                            <CourseResultsPage id={this.state.id}/>
                         )
                     }}/>
                     <Route path="/register" render={() => {
@@ -82,7 +83,7 @@ class App extends Component {
                             )
                         }
                         return (
-                            <RegisterPage/>
+                            <RegisterPage id={this.state.id}/>
                         )
                     }}/>
                 </ContentWrapper>

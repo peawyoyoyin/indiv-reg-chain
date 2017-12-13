@@ -13,17 +13,19 @@ const AuthenticationBoxWrapper = styled.div`
     width: 65%;
 `
 
-const authenticateSuccess = (text) => text === 'correct';
+const authenticateSuccess = (text) => {
+    return text === '5830000001' | text === '5830000002';
+}
 
 class AuthenticationBoxUI extends Component {
     constructor() {
         super()
         this.handleAuthenticationSubmit = this.handleAuthenticationSubmit.bind(this);
     }
-
+    
     handleAuthenticationSubmit() {
         if(authenticateSuccess(this.textInput.value)) {
-            this.props.history.push('/loginsuccess');
+            this.props.history.push('/loginsuccess/'+this.textInput.value);
         }
     }
 

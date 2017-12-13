@@ -33,7 +33,7 @@ class RegisterPage extends Component {
         const { subjects } = this.state
         return (
             <div style={{padding: '2em'}}>
-                <span> register page </span>
+                <span> register page  id: {this.props.id}</span>
                 <ul>
                     {
                         subjects.length > 0 ?

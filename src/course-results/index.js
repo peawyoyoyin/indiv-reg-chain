@@ -41,9 +41,11 @@ const ResultsTable = styled.table`
 
 class CourseResultsPage extends Component {
     render() {
+        let subjectoutput = subjects; //ใส่ function import ข้อมูล
+
         return (
             <div style={{padding: '1.5em'}}>
-                <span>{this.props.studentName || 'no name'}</span>
+                <span>{this.props.studentName || 'no name'} id: {this.props.id}</span>
                 <ResultsTable>
                     <tr>
                         <th>Subject Id</th>
@@ -51,7 +53,7 @@ class CourseResultsPage extends Component {
                         <th>Grade</th>
                     </tr>
                     {
-                        subjects.map(subject => (
+                        subjectoutput.map(subject => (
                             <tr>
                                 <td>{subject.id}</td>
                                 <td>{subject.name}</td>
