@@ -1,5 +1,19 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import getWeb3 from './../utils/getWeb3'
+import StudentContract from '../../build/contracts/Student.json'
+import SubjectContract from '../../build/contracts/Subject.json'
+import RegContract from '../../build/contracts/Reg.json'
+
+const contract = require('truffle-contract')
+const student = contract(StudentContract)
+const subject = contract(SubjectContract)
+const reg = contract(RegContract)
+var student1Instance
+var student2Instance
+var subject1Instance
+var subject2Instance
+var regInstance
 
 const TopBarDiv = styled.div`
 padding-top: 1em;
@@ -42,6 +56,20 @@ const ResultsTable = styled.table`
 class CourseResultsPage extends Component {
     render() {
         let subjectoutput = subjects; //ใส่ function import ข้อมูล
+        var outputList
+
+        this.state.web3.eth.getAccounts((error, accounts) => {
+            student.deployed().then((instance) => {
+                student1Instance = instance
+                student2Instance = instance
+                if(this.props.id===5830000001){
+                    outputList = student1Instance.getStudentSubjects.call()
+                }
+                if(this.props.id===5830000002){
+                    outputList = student2Instance.getStudentSubjects.call()
+                }
+            })
+          })
 
         return (
             <div style={{padding: '1.5em'}}>
@@ -62,6 +90,7 @@ class CourseResultsPage extends Component {
                         ))
                     }
                 </ResultsTable>
+                <span>{outputList}</span>
             </div>
         )
     }

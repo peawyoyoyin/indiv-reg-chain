@@ -35,7 +35,10 @@ const LoginInfoBox = () => (
         </LoginInfoContentDiv>
         <hr style={{borderColor: 'white', borderWidth: 0, borderTopWidth: 3, opacity: '0.25', noshade: 'noshade'}}/>
         <LoginInfoContentDiv>
-        user1 = 5830000001            user2 = 5830000002
+        student1 = 5830000001
+        student2 = 5830000002
+        subject1 = 1
+        subject2 = 2
         </LoginInfoContentDiv>
     </LoginInfoBoxDiv>
 )

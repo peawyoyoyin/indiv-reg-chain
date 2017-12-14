@@ -1,6 +1,19 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import getWeb3 from './../utils/getWeb3'
+import StudentContract from '../../build/contracts/Student.json'
+import SubjectContract from '../../build/contracts/Subject.json'
+import RegContract from '../../build/contracts/Reg.json'
 
+const contract = require('truffle-contract')
+const student = contract(StudentContract)
+const subject = contract(SubjectContract)
+const reg = contract(RegContract)
+var student1Instance
+var student2Instance
+var subject1Instance
+var subject2Instance
+var regInstance
 class RegisterPage extends Component {
     constructor() {
         super()
@@ -16,6 +29,42 @@ class RegisterPage extends Component {
             this.setState({
                 subjects: [...this.state.subjects, this.subjectInput.value]
             });
+            this.state.web3.eth.getAccounts((error, accounts) => {
+                reg.deployed().then((instance) => {
+                  regInstance = instance
+                  if(this.props.id===5830000001){
+                      regInstance.registerStudentToSubject(accounts[0],this.subjectInput.value)
+                  }
+                  if(this.props.id===5830000002){
+                      regInstance.registerStudentToSubject(accounts[1],this.subjectInput.value)
+                  }
+                })
+
+                student.deployed().then((instance) => {
+                    student1Instance = instance
+                    student2Instance = instance
+                    if(this.props.id===5830000001){
+                        student1Instance.addSubject(this.subjectInput.value,{from: accounts[0]})
+                    }
+                    if(this.props.id===5830000002){
+                        student2Instance.addSubject(this.subjectInput.value,{from: accounts[1]})
+                    }
+                })
+
+                subject.deployed().then((instance) => {
+                    subject1Instance = instance
+                    subject2Instance = instance
+                    if(this.props.id===5830000001){
+                        if(this.subjectInput.value===1)subject1Instance.registerStudent(accounts[0],{from: accounts[2]})
+                        if(this.subjectInput.value===2)subject2Instance.registerStudent(accounts[0],{from: accounts[3]})
+                    }
+                    if(this.props.id===5830000002){
+                        if(this.subjectInput.value===1)subject1Instance.registerStudent(accounts[1],{from: accounts[2]})
+                        if(this.subjectInput.value===2)subject2Instance.registerStudent(accounts[1],{from: accounts[3]})
+                    }
+                })
+
+              })
         }
         this.subjectInput.value = ''
     }

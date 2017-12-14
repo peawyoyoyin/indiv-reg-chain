@@ -6,25 +6,24 @@ import CourseResultsPage from './course-results/index'
 import RegisterPage from './register/index'
 import './index.css'
 import { Route, Redirect } from 'react-router'
+import getWeb3 from './utils/getWeb3'
+import StudentContract from '../build/contracts/Student.json'
+import SubjectContract from '../build/contracts/Subject.json'
+import RegContract from '../build/contracts/Reg.json'
+
+const contract = require('truffle-contract')
+const student = contract(StudentContract)
+const subject = contract(SubjectContract)
+const reg = contract(RegContract)
+var student1Instance
+var student2Instance
+var subject1Instance
+var subject2Instance
+var regInstance
 
 const contentWrapperStyle = {
     marginLeft: '15%',
 }
-
-/* const LongLorem = () => (
-    <div style={{height: '200vh'}}>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem, eaque? Recusandae, repellendus omnis cum cumque nesciunt aliquid qui ullam soluta nobis. Impedit, atque voluptatem incidunt fuga quasi praesentium dolores aut.
-        Laborum mollitia eius natus saepe expedita temporibus deserunt at! Doloremque fuga ut laudantium suscipit sit illo! Iusto laborum magni reiciendis tempora sunt repellat voluptatum ipsam id, ut aliquid ducimus culpa!
-        Enim incidunt excepturi non harum nam, autem hic vitae fuga id, cum, totam inventore magnam voluptatem ex quas assumenda explicabo. Ratione quae tempore doloremque voluptatem eum. Cum magni ratione placeat.
-        Aliquam aspernatur dolore quo sunt esse magnam iste quisquam nostrum, aperiam, consectetur maiores minima autem dolorum aut incidunt voluptates! Corrupti non quasi culpa itaque tempora aperiam pariatur alias recusandae delectus!
-        Odit voluptate facilis aliquid rerum inventore earum exercitationem harum quis blanditiis voluptates facere iste laudantium, repudiandae quisquam doloremque fuga aliquam error sit tempora dicta dolores, necessitatibus adipisci modi. Fuga, ipsum.
-        Dolores iure aliquid facere natus eum facilis, magni possimus consectetur labore amet neque nam. Provident nulla beatae sint fugiat id minima velit quisquam! Tempora, provident quam qui ab reprehenderit cumque.
-        Iste dolorum possimus nihil nam ea quae laudantium quibusdam placeat! Aliquid aspernatur minus asperiores unde eveniet dolorem, aperiam saepe numquam dolor autem delectus possimus laborum, perferendis impedit. Laudantium, incidunt tempora.
-        Sint, laborum? Fuga, ipsa consectetur! Recusandae odio adipisci eaque provident dolor rem autem iste fugiat, dolores saepe repellendus et. Eos tempora dolor veritatis alias maiores at culpa? Amet, aspernatur nihil!
-        Eius, nostrum at tempora nisi excepturi, dolorem, et laborum deleniti repellendus dolorum sequi ex voluptatibus praesentium veritatis dicta quis architecto aliquid quaerat soluta omnis ullam tempore consequatur necessitatibus voluptate. Maxime.
-        Rem perferendis voluptatem nobis ipsum, maxime magnam nisi natus, delectus sapiente rerum quos id dolores eius dolor vel, eligendi ad reprehenderit dignissimos soluta aperiam enim cupiditate mollitia explicabo. Tenetur, quos?
-    </div>
-) */
 
 const ContentWrapper = ({children}) => (
     <div style={contentWrapperStyle}>
@@ -33,13 +32,70 @@ const ContentWrapper = ({children}) => (
 )
 
 class App extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             loggedIn: false,
-            id: null
+            id: null,
+            web3: null
         }
     }
+    
+    componentWillMount() {
+        // Get network provider and web3 instance.
+        // See utils/getWeb3 for more info.
+        getWeb3
+        .then(results => {
+          this.setState({
+            web3: results.web3
+          })
+    
+          // Instantiate contract once web3 provided.
+          this.instantiateContract()
+        })
+        .catch(() => {
+          console.log('Error finding web3.')
+        })
+          // Instantiate contract once web3 provided.
+    }
+
+    instantiateContract() {
+        student.setProvider(this.state.web3.currentProvider)
+        subject.setProvider(this.state.web3.currentProvider)
+        reg.setProvider(this.state.web3.currentProvider)
+        
+    
+        // Get accounts.
+        this.state.web3.eth.getAccounts((error, accounts) => {
+          student.deployed().then((instance) => {
+            student1Instance = instance
+            student2Instance = instance
+            student1Instance.Student({from: accounts[0]})
+            student2Instance.Student({from: accounts[1]})
+          })
+          
+          subject.deployed().then((instance) => {
+            subject1Instance = instance
+            subject2Instance = instance
+            subject1Instance.Subject({from: accounts[2]})
+            subject2Instance.Subject({from: accounts[3]})
+
+            subject1Instance.setTeacher(accounts[2],{from: accounts[2]})
+            subject1Instance.setOpenSeats(1,{from: accounts[2]})
+            subject2Instance.setTeacher(accounts[3],{from: accounts[3]})
+            subject2Instance.setOpenSeats(2,{from: accounts[3]})
+          })
+
+          reg.deployed().then((instance) => {
+            regInstance = instance
+            regInstance.Reg({from: accounts[4]})
+            regInstance.registerSubject(1,1,accounts[2],{from: accounts[2]})
+            regInstance.registerSubject(2,2,accounts[3],{from: accounts[3]})
+            regInstance.registerStudent({from: accounts[0]})
+            regInstance.registerStudent({from: accounts[1]})
+          })
+        })
+      }
 
     render() {
         return (
@@ -47,7 +103,7 @@ class App extends Component {
                 <SideBar loggedIn={this.state.loggedIn}/>
                 <ContentWrapper>
                     <Route exact path="/" render={() => (
-                        this.state.loggedIn ? <span> Already Logged In {this.state.id} </span> : <LoginPage/>
+                        this.state.loggedIn ? <span> Welcome {this.state.id} </span> : <LoginPage/>
                     )} />
                     <Route path="/courseinfo" component={CourseInfoPage}/>
                     <Route path="/loginsuccess/:userid" render={({match}) => {
