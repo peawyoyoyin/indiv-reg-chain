@@ -14,16 +14,16 @@ contract Reg is Mortal {
         withDrawPenalty = false;
     }
 
-    function registerSubject(bytes8 _subjectId, uint _openSeats, address _teacher) public onlyOwner {
+    function registerSubject(address _subjectAddress, bytes8 _subjectId, uint _openSeats, address _teacher) public {
         require(subjects[_subjectId].exist() == false);
-        subjects[_subjectId] = Subject(msg.sender);
+        subjects[_subjectId] = Subject(_subjectAddress);
         subjects[_subjectId].setOpenSeats(_openSeats);
         subjects[_subjectId].setTeacher(_teacher);
     }
 
-    function registerStudent() public onlyOwner {
-        require(students[msg.sender].exist() == false);
-        students[msg.sender] = Student(msg.sender);
+    function registerStudent(address _studentAddress) public {
+        require(students[_studentAddress].exist() == false);
+        students[_studentAddress] = Student(_studentAddress);
     }
 
     function isStudentValid(address _studentAddress) public view returns (bool) {
@@ -38,5 +38,16 @@ contract Reg is Mortal {
         require(students[_student].exist() == true);
         subjects[_subjectId].registerStudent(_student);
         students[_student].addSubject(_subjectId);
+    }
+
+    function withdrawStudentFromSubject(address _student, bytes8 _subjectId) {
+        require(students[_student].exist() == true);
+        subjects[_subjectId].studentWithDraw(_student,withDrawPenalty);
+        students[_student].withDrawSubject(_subjectId,withDrawPenalty);
+    }
+
+    function setStudentGrade(address _student, bytes8 _subjectId, Subject.Grade _grade) {
+        require(students[_student].exist() == true);
+        students[_student].setSubjectGrade(_subjectId, _grade);
     }
 }

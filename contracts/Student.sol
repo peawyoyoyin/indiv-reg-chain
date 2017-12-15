@@ -30,4 +30,13 @@ contract Student {
     function getStudentSubjects() public returns (bytes8[]) {
         return subjectsList;
     }
+
+    function withDrawSubject(bytes8 _subjectId, bool _withDrawPenalty) public {
+        if (_withDrawPenalty) {
+            subjects[_subjectId] = Subject.Grade.W;
+        } else {
+            subjects[_subjectId] = Subject.Grade.NotExist;
+        }
+    }
+
 }
